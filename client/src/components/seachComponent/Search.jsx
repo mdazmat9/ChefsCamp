@@ -22,7 +22,7 @@ class Search extends Component {
     let userName = Cookie.get("userName");
     console.log(this.props.contests && 1);
     if (!this.props.contests && userName) {
-      axios.get(`http://localhost:88/contests/${userName}`).then(res => {
+      axios.get(`http://localhost:80/contests/${userName}`).then(res => {
         this.props.handleLiftContests(res.data);
       });
     }

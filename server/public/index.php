@@ -38,7 +38,7 @@ $app->get('/', function ($request, $response, $args) {
 
 $app->get('/login', function ($request, $response, $args) {
     return $response
-        ->withHeader('Location', 'https://api.codechef.com/oauth/authorize?response_type=code&client_id=5ba32168f9c8b99f1703166f01e6d736&state=xyz&redirect_uri=http://localhost:88/')
+        ->withHeader('Location', 'https://api.codechef.com/oauth/authorize?response_type=code&client_id=339259dc16c29a7f4dae446ec5a873b0&state=xyz&redirect_uri=http://localhost:88/')
         ->withStatus(302);
 });
 
@@ -214,8 +214,8 @@ function make_curl_request($url, $post = FALSE, $headers = array()){
 
 // Return config details whereever required
 function get_config(){
-    $config = array('client_id'=> '5ba32168f9c8b99f1703166f01e6d736',
-    'client_secret' => '64a8bab722fa45cc716f68451cf27f74',
+    $config = array('client_id'=> '339259dc16c29a7f4dae446ec5a873b0',
+    'client_secret' => '4ec05f3bc1e5cca3b602a400d9c24b39',
     'api_endpoint'=> 'https://api.codechef.com/',
     'authorization_code_endpoint'=> 'https://api.codechef.com/oauth/authorize',
     'access_token_endpoint'=> 'https://api.codechef.com/oauth/token',

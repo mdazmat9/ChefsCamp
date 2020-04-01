@@ -18,7 +18,7 @@ class Ranklist extends Component {
 		let userName = Cookie.get("userName");
 		axios
 			.get(
-				`http://localhost:88/rankings/${this.props.match.params.contestCode}/${userName}`
+				`http://localhost:80/rankings/${this.props.match.params.contestCode}/${userName}`
 			)
 			.then(res => {
 				this.setState({ loaded: true, data: res.data });

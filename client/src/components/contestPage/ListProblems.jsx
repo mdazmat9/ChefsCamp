@@ -23,7 +23,7 @@ class ListProblems extends Component {
   componentDidMount() {
     let userName = Cookie.get("userName");
     axios
-      .get(`http://localhost:88/contests/${this.props.contestCode}/${userName}`)
+      .get(`http://localhost:80/contests/${this.props.contestCode}/${userName}`)
       .then(res => {
         this.props.handleLiftContestDetail(res.data);
         if (res.data.result.data.content.problemsList.length > 0) {

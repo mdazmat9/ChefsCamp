@@ -22,7 +22,7 @@ class ProblemInfo extends Component {
     let userName = Cookie.get("userName");
     axios
       .get(
-        `http://localhost:88/contests/${this.props.match.params.contestCode}/problems/${this.props.match.params.problemCode}/${userName}`
+        `http://localhost:80/contests/${this.props.match.params.contestCode}/problems/${this.props.match.params.problemCode}/${userName}`
       )
       .then(res => {
         if (res.data.result.data.content.body) {
