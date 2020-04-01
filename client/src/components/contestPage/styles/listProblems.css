@@ -1,0 +1,42 @@
+#title {
+    text-align: center;
+    font-family: arial, sans-serif;
+}
+
+/* table {
+
+} */
+
+caption {
+    padding: 10px;
+    font-size: 2rem;
+}
+
+#students {
+    border-collapse: collapse;
+    border: 3px solid #ddd;
+    width: 100%;
+    height: auto;
+    width: 620px;
+}
+
+#students td, #students th {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+#students td {
+    cursor: pointer;
+}
+
+#students tr:nth-child(even){background-color: #f2f2f2;}
+
+#students tr:hover {background-color: #ddd;}
+
+#students th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    background-color: #fad75a;
+    color: #1b1b1b;
+}
+  
