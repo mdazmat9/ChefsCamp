@@ -26,7 +26,8 @@ Made with ❤ to help you grow. Chef'sCamp is a platform that consumes CodeChef 
 
 ## Run it on your system as production
 1. After installing all the dependensies described above, 
-```cd ChefsCamp/server/public
+```
+   cd ChefsCamp/server/public
    sudo php -S localhost:88 
 ```
 2. Open localhost:88 on your browser and hit login
