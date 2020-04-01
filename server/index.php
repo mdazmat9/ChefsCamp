@@ -10,7 +10,7 @@ $app = AppFactory::create();
 $app->get('/', function ($request, $response, $args) {
     // if(isset($_GET['code'])){
     //     $code = $_GET['code'];
-    //     $url = 'http://localhost:3000/?code='. $code;
+    //     $url = 'http://104.211.140.20:3000/?code='. $code;
     //     // $user_data = json_encode(main());
         
     //     // $response->getBody()->write($user_data);
@@ -38,7 +38,7 @@ $app->get('/', function ($request, $response, $args) {
 
 $app->get('/login', function ($request, $response, $args) {
     return $response
-        ->withHeader('Location', 'https://api.codechef.com/oauth/authorize?response_type=code&client_id=339259dc16c29a7f4dae446ec5a873b0&state=xyz&redirect_uri=http://localhost:80/')
+        ->withHeader('Location', 'https://api.codechef.com/oauth/authorize?response_type=code&client_id=339259dc16c29a7f4dae446ec5a873b0&state=xyz&redirect_uri=http://104.211.140.20:80/')
         ->withStatus(302);
 });
 
@@ -213,8 +213,8 @@ function get_config(){
     'api_endpoint'=> 'https://api.codechef.com/',
     'authorization_code_endpoint'=> 'https://api.codechef.com/oauth/authorize',
     'access_token_endpoint'=> 'https://api.codechef.com/oauth/token',
-    'redirect_uri'=> 'http://localhost:80/',
-    'website_base_url' => 'http://localhost:80/');
+    'redirect_uri'=> 'http://104.211.140.20:80/',
+    'website_base_url' => 'http://104.211.140.20:80/');
 
     return $config;
 }
@@ -263,7 +263,7 @@ function take_user_to_codechef_permissions_page($config){
 
     $params = array('response_type'=>'code', 'client_id'=> $config['client_id'], 'redirect_uri'=> $config['redirect_uri'], 'state'=> 'xyz');
     header('Location: ' . $config['authorization_code_endpoint'] . '?' . http_build_query($params));
-    // $app->redirect('/login', 'https://api.codechef.com/oauth/authorize?response_type=code&client_id=ad65745b99e00211dd613e8bb4cd9a76&state=xyz&redirect_uri=http://localhost:88/', 301);
+    // $app->redirect('/login', 'https://api.codechef.com/oauth/authorize?response_type=code&client_id=ad65745b99e00211dd613e8bb4cd9a76&state=xyz&redirect_uri=http://104.211.140.20:88/', 301);
     die();
 }
 

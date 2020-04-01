@@ -17,7 +17,7 @@ class SuccessfulSubmissions extends Component {
     let userName = Cookie.get("userName");
     axios
       .get(
-        `http://localhost:80/submissions/${this.props.problemCode}/${userName}`
+        `http://104.211.140.20:80/submissions/${this.props.problemCode}/${userName}`
       )
       .then(res => {
         if (res.data.result.data.message === "submissions fetched successfully") {
