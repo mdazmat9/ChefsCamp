@@ -69,7 +69,7 @@ class App extends Component {
       this.setState({ loading: true });
       // console.log(code);
       axios
-        .get(`http://104.211.140.20:80/auth/?code=${code}`)
+        .get(`http://104.211.136.212/auth/?code=${code}`)
         .then(res => {
           // console.log(res);
           Cookie.set("userName", res.data.result.data.content.username, {

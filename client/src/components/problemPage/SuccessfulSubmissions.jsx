@@ -13,23 +13,25 @@ class SuccessfulSubmissions extends Component {
       showMess: false,
     };
   }
-  componentDidMount() {
+  componentWillReceiveProps(newProps) {
     let userName = Cookie.get("userName");
-    axios
-      .get(
-        `http://104.211.140.20:80/submissions/${this.props.problemCode}/${userName}`
-      )
-      .then(res => {
-        if (res.data.result.data.message === "submissions fetched successfully") {
-          this.setState({ loaded: true, data: res.data });
-        } else {
-          this.setState({
-            loaded: true,
-            showMess: true,
-            message: res.data.result.data.message
-          });
-        }
+    if(newProps.probStatus){
+      axios
+        .get(
+          `http://104.211.136.212/submissions/${newProps.problemCode}/${userName}`
+        )
+        .then(res => {
+          if (res.data.result.data.message === "submissions fetched successfully") {
+            this.setState({ loaded: true, data: res.data });
+          } else {
+            this.setState({
+              loaded: true,
+              showMess: true,
+              message: res.data.result.data.message
+            });
+          }
       });
+    }
   }
 
   renderTableData() {

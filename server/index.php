@@ -8,23 +8,8 @@ require __DIR__ . '/vendor/autoload.php';
 $app = AppFactory::create();
 
 $app->get('/', function ($request, $response, $args) {
-    // if(isset($_GET['code'])){
-    //     $code = $_GET['code'];
-    //     $url = 'http://104.211.140.20:3000/?code='. $code;
-    //     // $user_data = json_encode(main());
-        
-    //     // $response->getBody()->write($user_data);
-    //     // return $response
-    //     //   ->withHeader('Content-Type', 'application/json');
-       
-    //     return $response
-    //         ->withHeader('Location', $url);
-    // }else{
-        
-    // }
-    
     $file = __DIR__.'/index.html';
-    echo file_get_contents($file);
+    // echo file_get_contents($file);
     if (file_exists($file)) {
         $response->getBody()->write(file_get_contents($file));
         $response = $response->withHeader('Content-Type', 'text/html');
@@ -38,7 +23,7 @@ $app->get('/', function ($request, $response, $args) {
 
 $app->get('/login', function ($request, $response, $args) {
     return $response
-        ->withHeader('Location', 'https://api.codechef.com/oauth/authorize?response_type=code&client_id=339259dc16c29a7f4dae446ec5a873b0&state=xyz&redirect_uri=http://104.211.140.20:80/')
+        ->withHeader('Location', 'https://api.codechef.com/oauth/authorize?response_type=code&client_id=339259dc16c29a7f4dae446ec5a873b0&state=xyz&redirect_uri=http://104.211.136.212/')
         ->withStatus(302);
 });
 
@@ -213,8 +198,8 @@ function get_config(){
     'api_endpoint'=> 'https://api.codechef.com/',
     'authorization_code_endpoint'=> 'https://api.codechef.com/oauth/authorize',
     'access_token_endpoint'=> 'https://api.codechef.com/oauth/token',
-    'redirect_uri'=> 'http://104.211.140.20:80/',
-    'website_base_url' => 'http://104.211.140.20:80/');
+    'redirect_uri'=> 'http://104.211.136.212/',
+    'website_base_url' => 'http://104.211.136.212/');
 
     return $config;
 }

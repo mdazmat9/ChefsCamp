@@ -27,7 +27,7 @@ class login extends Component {
 
   handleClick(event) {
     event.preventDefault();
-    window.location.href = "http://104.211.140.20:80/login";
+    window.location.href = "http://104.211.136.212/login";
     // let loginData;
     // axios.get('http://localhost:8888/login')
     // .then(res =>{

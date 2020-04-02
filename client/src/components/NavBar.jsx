@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import Cookie from "js-cookie";
 import { Link } from "react-router-dom";
+import logo from './logos/logo2.png';
 
 const ul = {
   overflow: "hidden",
@@ -52,9 +53,8 @@ class NavBar extends Component {
             <li style={floatLeft}>
               <strong style={{ fontSize: "30px", color: "#1b1b1b" }}>
                 &lt; Chef&apos;sCamp
-                <span role="img" aria-label="Close">
-                  ✅
-                </span>{" "}
+                <img src={logo} alt="logo" />
+                {" "}
                 /&gt;
               </strong>
             </li>

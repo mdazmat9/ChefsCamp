@@ -22,7 +22,7 @@ class ProblemInfo extends Component {
     let userName = Cookie.get("userName");
     axios
       .get(
-        `http://104.211.140.20:80/contests/${this.props.match.params.contestCode}/problems/${this.props.match.params.problemCode}/${userName}`
+        `http://104.211.136.212/contests/${this.props.match.params.contestCode}/problems/${this.props.match.params.problemCode}/${userName}`
       )
       .then(res => {
         if (res.data.result.data.content.body) {
@@ -82,6 +82,7 @@ class ProblemInfo extends Component {
           </li>
           <li style={{ float: "right", width: "320px" }}>
             <SuccessfulSubmissions
+              probStatus = {this.state.loaded}
               problemCode={this.props.match.params.problemCode}
             />
           </li>
@@ -112,6 +113,7 @@ class ProblemInfo extends Component {
             </li>
             <li style={{ float: "right", width: "320px" }}>
               <SuccessfulSubmissions
+                probStatus = {this.state.loaded}
                 problemCode={this.props.match.params.problemCode}
               />
             </li>
@@ -142,7 +144,9 @@ class ProblemInfo extends Component {
               </div>
             </li>
             <li style={{ float: "right", width: "320px" }}>
-              <SuccessfulSubmissions />
+              <SuccessfulSubmissions
+                probStatus = {this.state.loaded} 
+              />
             </li>
           </ul>
         );
