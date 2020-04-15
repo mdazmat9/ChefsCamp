@@ -6,7 +6,7 @@ Made with ❤ to help you grow. Chef'sCamp is a platform that consumes CodeChef 
 
 1. Clone the repo, install dependencies:
    ```
-   git clone https://github.com/mozilla/FirefoxColor.git
+   git clone https://github.com/ankiiitraj/ChefsCamp
    1. Client Side 
     cd chefsCamp/client
     npm install
