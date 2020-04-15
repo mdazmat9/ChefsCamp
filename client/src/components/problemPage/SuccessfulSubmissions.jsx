@@ -61,7 +61,7 @@ class SuccessfulSubmissions extends Component {
   render() {
     if (this.state.loaded) {
       return (
-        <div style={{ border: "solid black 3px" }}>
+        <div style={{ border: "solid 3px" }}>
           <table id="submissions">
             <caption style={{ textAlign: "left", fontSize: "15px" }}>
               <b>Successful Submissions</b>
@@ -76,7 +76,7 @@ class SuccessfulSubmissions extends Component {
     } else {
       return (
         <div
-          style={{ border: "solid black 3px", width: "320px", height: "211px" }}
+          style={{ border: "solid 3px", width: "320px", height: "211px" }}
         >
           <table id="submissions">
             <caption style={{ textAlign: "left", fontSize: "15px" }}>

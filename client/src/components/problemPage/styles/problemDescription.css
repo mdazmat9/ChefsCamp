@@ -2,12 +2,12 @@
     padding: 10px;
     list-style-type: none;
     overflow: hidden;
-    border: solid black 3px;
+    border: solid 3px;
 }
 
 .problemDescription{
     padding: 1rem;
-    border: solid black 3px;
+    border: solid 3px;
     font-size: 14px;
 }
 .problemDescription h1, h2{
@@ -23,7 +23,7 @@
     padding: 10px;
     list-style-type: none;
     overflow: hidden;
-    border: solid black 3px;
+    border: solid 3px;
 }
 .problemDescription button{
     background-color: #fad75a;

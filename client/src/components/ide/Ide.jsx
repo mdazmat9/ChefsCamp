@@ -29,7 +29,7 @@ class Ide extends Component {
     };
     return (
       <div className="ide">
-        <div style={{ textAlign: "left", border: "solid black 5px" }}>
+        <div style={{ textAlign: "left", border: "solid 5px" }}>
           <CodeMirror
             style={{ height: "auto" }}
             value={this.state.code}

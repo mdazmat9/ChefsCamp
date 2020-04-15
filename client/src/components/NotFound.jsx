@@ -6,7 +6,7 @@ class NotFound extends Component {
     return (
       <div
         style={{
-          border: "solid black 4px",
+          border: "solid 4px",
           height: "300px",
           padding: "150px 0px"
         }}

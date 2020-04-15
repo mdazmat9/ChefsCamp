@@ -46,7 +46,7 @@ class Ranklist extends Component {
 	render() {
 		if (this.state.loaded) {
 			return (
-				<div style={{ border: "solid black 5px" }}>
+				<div style={{ border: "solid 5px" }}>
 					<table id="ranklist">
 						<caption style={{ textAlign: "left" }}>Ranklist</caption>
 						<tbody>

@@ -12,6 +12,20 @@ import axios from "axios";
 import Cookie from "js-cookie";
 import NotFound from "./components/NotFound.jsx";
 
+const light = {
+  minHeight: '100vh',
+  backgroundColor: "white",
+  color: "black",
+  transition: 'background 1s ease, padding 0.8s linear',
+};
+const dark = {
+  backgroundColor: "black",
+  minHeight: '100vh',
+  color: "white",
+  borderColor: "white",
+  transition: 'background 1s ease, padding 0.8s linear',
+};
+
 class App extends Component {
   constructor(props) {
     super(props);
@@ -20,8 +34,10 @@ class App extends Component {
       band: "",
       isLoggedIn: false,
       loading: false,
-      contests: null
+      contests: null,
+      theme: (Cookie.get('theme') == 0 ? dark : light),
     };
+    this.handleToggle = this.handleToggle.bind(this);
     this.handleLogin = this.handleLogin.bind(this);
     this.handleLogout = this.handleLogout.bind(this);
     this.componentDidMount = this.componentDidMount.bind(this);
@@ -88,13 +104,31 @@ class App extends Component {
         });
     }
   }
+  handleToggle() {
+    this.state.theme === light ? Cookie.set('theme', 0, {expires: 30}) : Cookie.set('theme', 1, {expires: 30});
+    let toggleTo = this.state.theme === light ? dark : light;
+    this.setState({
+      theme: toggleTo,
+    });
+  }
 
   render() {
     return (
+      <div 
+        style={this.state.theme}
+        ref={(el) => {
+          if (el && this.state.theme === dark) {
+            el.style.setProperty('color', 'white', 'important');
+            el.style.setProperty('borderColor', 'white', 'important');
+          }
+        }}
+      >
       <center>
         <div style={{ width: "963px", maxWidth: "963px" }}>
           <Router>
             <NavBar
+              handleToggle={this.handleToggle}
+              color={this.state.theme.color}
               handleLogout={this.handleLogout}
               userName={
                 this.state.loading
@@ -150,6 +184,7 @@ class App extends Component {
           </Router>
         </div>
       </center>
+      </div>
     );
   }
 }

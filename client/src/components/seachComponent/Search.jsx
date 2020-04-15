@@ -108,7 +108,7 @@ class Search extends Component {
     const textBox = {
       height: "30px",
       width: "500px",
-      border: "solid black 5px"
+      border: "solid 5px"
     };
     const searchList = {
       width: "calc(500px)"
@@ -155,7 +155,7 @@ class Search extends Component {
       return (
         <div
           style={{
-            border: "solid black 5px",
+            border: "solid 5px",
             height: "600px",
             paddingTop: "150px"
           }}
