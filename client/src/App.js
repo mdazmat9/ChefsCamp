@@ -13,17 +13,21 @@ import Cookie from "js-cookie";
 import NotFound from "./components/NotFound.jsx";
 
 const light = {
-  minHeight: '100vh',
+  minHeight: "100vh",
+  minWidth: "max-content",
   backgroundColor: "white",
   color: "black",
-  transition: 'background 1s ease, padding 0.8s linear',
+  paddingTop: "5px",
+  transition: "background 1s ease, padding 0.8s linear",
 };
 const dark = {
-  backgroundColor: "black",
-  minHeight: '100vh',
+  backgroundColor: "#1b1b1b",
+  minWidth: "max-content",
+  minHeight: "100vh",
   color: "white",
+  paddingTop: "5px",
   borderColor: "white",
-  transition: 'background 1s ease, padding 0.8s linear',
+  transition: "background 1s ease, padding 0.8s linear",
 };
 
 class App extends Component {
@@ -35,7 +39,8 @@ class App extends Component {
       isLoggedIn: false,
       loading: false,
       contests: null,
-      theme: (Cookie.get('theme') == 0 ? dark : light),
+      // eslint-disable-next-line
+      theme: Cookie.get("theme") == 0 ? dark : light,
     };
     this.handleToggle = this.handleToggle.bind(this);
     this.handleLogin = this.handleLogin.bind(this);
@@ -49,7 +54,7 @@ class App extends Component {
     for (let i = 0; i < contest.length; ++i) {
       contestsList.push({
         detail: `${contest[i].name}(${contest[i].code})`,
-        code: contest[i].code
+        code: contest[i].code,
       });
     }
     this.setState({ contests: contestsList });
@@ -59,14 +64,14 @@ class App extends Component {
       userName: userName,
       band: band,
       isLoggedIn: true,
-      loading: false
+      loading: false,
     });
   }
   handleLogout() {
     this.setState({
       userName: "",
       band: "",
-      isLoggedIn: false
+      isLoggedIn: false,
     });
     Cookie.remove("userName");
     Cookie.remove("band");
@@ -79,33 +84,36 @@ class App extends Component {
       this.setState({
         isLoggedIn: true,
         userName: Cookie.get("userName"),
-        band: Cookie.get("band")
+        band: Cookie.get("band"),
       });
     } else if (code) {
       this.setState({ loading: true });
       // console.log(code);
       axios
-        .get(`http://104.211.136.212/auth/?code=${code}`)
-        .then(res => {
+        .get(`/auth/?code=${code}`)
+        .then((res) => {
           // console.log(res);
           Cookie.set("userName", res.data.result.data.content.username, {
-            expires: 30
+            expires: 30,
           });
           Cookie.set("band", res.data.result.data.content.band, {
-            expires: 30
+            expires: 30,
           });
           this.handleLogin(
             res.data.result.data.content.username,
             res.data.result.data.content.band
           );
         })
-        .catch(err => {
+        .catch((err) => {
           console.log("err", err);
         });
     }
   }
+
   handleToggle() {
-    this.state.theme === light ? Cookie.set('theme', 0, {expires: 30}) : Cookie.set('theme', 1, {expires: 30});
+    this.state.theme === light
+      ? Cookie.set("theme", 0, { expires: 30 })
+      : Cookie.set("theme", 1, { expires: 30 });
     let toggleTo = this.state.theme === light ? dark : light;
     this.setState({
       theme: toggleTo,
@@ -114,76 +122,76 @@ class App extends Component {
 
   render() {
     return (
-      <div 
+      <div
         style={this.state.theme}
         ref={(el) => {
           if (el && this.state.theme === dark) {
-            el.style.setProperty('color', 'white', 'important');
-            el.style.setProperty('borderColor', 'white', 'important');
+            el.style.setProperty("color", "white", "important");
+            el.style.setProperty("borderColor", "white", "important");
           }
         }}
       >
-      <center>
-        <div style={{ width: "963px", maxWidth: "963px" }}>
-          <Router>
-            <NavBar
-              handleToggle={this.handleToggle}
-              color={this.state.theme.color}
-              handleLogout={this.handleLogout}
-              userName={
-                this.state.loading
-                  ? ". . ."
-                  : this.state.userName === ""
-                  ? "User"
-                  : this.state.userName
-              }
-              band={this.state.band === "" ? "N/A" : this.state.band}
-            />
-            <Switch>
-              <Route
-                exact
-                path="/"
-                render={props =>
-                  this.state.isLoggedIn ? (
-                    <Search
-                      {...this.state}
-                      contests={this.state.contests}
-                      handleLiftContests={this.handleLiftContests}
-                    />
-                  ) : (
-                    <Login />
-                  )
+        <center>
+          <div style={{ width: "963px", maxWidth: "963px" }}>
+            <Router>
+              <NavBar
+                handleToggle={this.handleToggle}
+                color={this.state.theme.color}
+                handleLogout={this.handleLogout}
+                userName={
+                  this.state.loading
+                    ? ". . ."
+                    : this.state.userName === ""
+                    ? "User"
+                    : this.state.userName
                 }
+                band={this.state.band === "" ? "N/A" : this.state.band}
               />
-              <ProtectedRoute
-                exact
-                userDetails={this.state}
-                path="/contest/:contestCode"
-                component={ContestPage}
-              />
-              <ProtectedRoute
-                exact
-                userDetails={this.state}
-                path="/ranklist/:contestCode"
-                component={Ranklist}
-              />
-              <ProtectedRoute
-                exact
-                userDetails={this.state}
-                path="/contest/:contestCode/problem/:problemCode"
-                component={ProblemInfo}
-              />
-              <ProtectedRoute
-                exact
-                userDetails={this.state}
-                path="/ide"
-                component={Ide}
-              />
-              <Route path="/" component={NotFound} />
-            </Switch>
-          </Router>
-        </div>
-      </center>
+              <Switch>
+                <Route
+                  exact
+                  path="/"
+                  render={(props) =>
+                    this.state.isLoggedIn ? (
+                      <Search
+                        {...this.state}
+                        contests={this.state.contests}
+                        handleLiftContests={this.handleLiftContests}
+                      />
+                    ) : (
+                      <Login />
+                    )
+                  }
+                />
+                <ProtectedRoute
+                  exact
+                  userDetails={this.state}
+                  path="/contest/:contestCode"
+                  component={ContestPage}
+                />
+                <ProtectedRoute
+                  exact
+                  userDetails={this.state}
+                  path="/ranklist/:contestCode"
+                  component={Ranklist}
+                />
+                <ProtectedRoute
+                  exact
+                  userDetails={this.state}
+                  path="/contest/:contestCode/problem/:problemCode"
+                  component={ProblemInfo}
+                />  
+                <ProtectedRoute
+                  exact
+                  userDetails={this.state}
+                  path="/ide"
+                  component={Ide}
+                />
+                <Route path="/" component={NotFound} />
+              </Switch>
+            </Router>
+          </div>
+        </center>
       </div>
     );
   }

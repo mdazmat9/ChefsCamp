@@ -13,7 +13,7 @@ class ListProblems extends Component {
       redirect: false,
       loaded: false,
       is404: false,
-      message: ""
+      message: "",
     };
     this.renderTableData = this.renderTableData.bind(this);
     this.renderTableHeader = this.renderTableHeader.bind(this);
@@ -22,20 +22,18 @@ class ListProblems extends Component {
   }
   componentDidMount() {
     let userName = Cookie.get("userName");
-    axios
-      .get(`http://104.211.136.212/contests/${this.props.contestCode}/${userName}`)
-      .then(res => {
-        this.props.handleLiftContestDetail(res.data);
-        if (res.data.result.data.content.problemsList.length > 0) {
-          this.setState({ loaded: true });
-        } else {
-          this.setState({
-            loaded: true,
-            message: "Problems not currently available . . .",
-            is404: true
-          });
-        }
-      });
+    axios.get(`/contests/${this.props.contestCode}/${userName}`).then((res) => {
+      this.props.handleLiftContestDetail(res.data);
+      if (res.data.result.data.content.problemsList.length > 0) {
+        this.setState({ loaded: true });
+      } else {
+        this.setState({
+          loaded: true,
+          message: "Problems not currently available . . .",
+          is404: true,
+        });
+      }
+    });
   }
   renderTableData() {
     return this.props.data.result.data.content.problemsList.map(
@@ -72,7 +70,7 @@ class ListProblems extends Component {
       return (
         <Redirect
           to={{
-            pathname: `${this.props.contestCode}/problem/${this.state.selected}`
+            pathname: `${this.props.contestCode}/problem/${this.state.selected}`,
           }}
         />
       );
@@ -86,6 +84,20 @@ class ListProblems extends Component {
       }
       return (
         <div>
+          <div
+            style={{
+              padding: "10px",
+              marginBottom: "-5px",
+              paddingBottom: "2px",
+              border: "none",
+            }}
+          >
+            <img
+              src={this.props.data.result.data.content.bannerFile}
+              alt="banner"
+              style={{width: "580px"}}
+            />
+          </div>
           <table id="students">
             <caption style={{ textAlign: "left" }}>Problems</caption>
             <tbody>

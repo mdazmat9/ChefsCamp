@@ -22,7 +22,7 @@ class Search extends Component {
     let userName = Cookie.get("userName");
     console.log(this.props.contests && 1);
     if (!this.props.contests && userName) {
-      axios.get(`http://104.211.136.212/contests/${userName}`).then(res => {
+      axios.get(`/contests/${userName}`).then(res => {
         this.props.handleLiftContests(res.data);
       });
     }
@@ -144,7 +144,7 @@ class Search extends Component {
       renderList = (
         <ul style={searchList} className="suggestions">
           <li>
-            <strong>Loaging . . .</strong>
+            <strong>Loading . . .</strong>
           </li>
         </ul>
       );

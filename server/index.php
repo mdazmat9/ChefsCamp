@@ -7,6 +7,10 @@ require __DIR__ . '/vendor/autoload.php';
 
 $app = AppFactory::create();
 
+$app->addBodyParsingMiddleware();
+$app->addRoutingMiddleware();
+$app->addErrorMiddleware(true, true, true);
+
 $app->get('/', function ($request, $response, $args) {
     $file = __DIR__.'/index.html';
     // echo file_get_contents($file);
@@ -23,7 +27,7 @@ $app->get('/', function ($request, $response, $args) {
 
 $app->get('/login', function ($request, $response, $args) {
     return $response
-        ->withHeader('Location', 'https://api.codechef.com/oauth/authorize?response_type=code&client_id=339259dc16c29a7f4dae446ec5a873b0&state=xyz&redirect_uri=http://104.211.136.212/')
+        ->withHeader('Location', 'https://api.codechef.com/oauth/authorize?response_type=code&client_id=339259dc16c29a7f4dae446ec5a873b0&state=xyz&redirect_uri=http://chefscamp.tech/')
         ->withStatus(302);
 });
 
@@ -72,7 +76,42 @@ $app->get('/submissions/{problemId}/{userName}', function ($request, $response, 
       ->withHeader('Content-Type', 'application/json');;
 });
 
+$app->get('/ide/status/{link}/{userName}', function ($request, $response, $args) {
+    $payload = json_encode(make_ide_status_api_request($args['userName'], $args['link']));
+    $response->getBody()->write($payload);
+    return $response
+      ->withHeader('Content-Type', 'application/json');;
+});
+
+$app->post('/ide/run/{userName}', function ($request, $response, $args) {
+    $body = $request->getParsedBody();
+    $payload = json_encode(make_ide_run_api_request($args['userName'], $body));
+    $response->getBody()->write($payload);
+    return $response
+      ->withHeader('Content-Type', 'application/json');
+});
+
+$app->any('{route:.*}', function ($request, $response, $args) {
+    return $response
+        ->withHeader('Location', '/')
+        ->withStatus(302);
+});
+
 /* ******************************************************ROUTES ENDED************************************************************ */
+
+function make_ide_run_api_request($user_name, $payload){
+    $config = get_config();
+    $path = $config['api_endpoint']."ide/run";
+    $response = json_decode(make_api_post_request($user_name, $path, $payload));
+    return $response;
+}
+
+function make_ide_status_api_request($user_name, $link){
+    $config = get_config();
+    $path = $config['api_endpoint']."ide/status?link=".$link;
+    $response = json_decode(make_api_request($user_name, $path));
+    return $response;
+}
 
 function make_submissions_api_request($user_name, $problem_ID){
     $config = get_config();
@@ -176,7 +215,15 @@ function make_api_request($user_name, $path){
     return make_curl_request($path, false, $headers);
 }
 
-function make_curl_request($url, $post = FALSE, $headers = array()){
+function make_api_post_request($user_name, $path, $payload){
+    $oauth_details = get_oauth_details_from_db($user_name);
+    $oauth_details = generate_access_token_from_refresh_token($oauth_details);
+    update_or_set_user_details_to_db($oauth_details, $user_name);
+    $headers[] = 'Authorization: Bearer ' . $oauth_details['access_token'];
+    return make_curl_request($path, $payload, $headers);
+}
+
+function make_curl_request($url, $post, $headers = array()){
     $ch = curl_init($url);
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
 
@@ -198,8 +245,8 @@ function get_config(){
     'api_endpoint'=> 'https://api.codechef.com/',
     'authorization_code_endpoint'=> 'https://api.codechef.com/oauth/authorize',
     'access_token_endpoint'=> 'https://api.codechef.com/oauth/token',
-    'redirect_uri'=> 'http://104.211.136.212/',
-    'website_base_url' => 'http://104.211.136.212/');
+    'redirect_uri'=> 'http://chefscamp.tech/',
+    'website_base_url' => 'http://chefscamp.tech/');
 
     return $config;
 }

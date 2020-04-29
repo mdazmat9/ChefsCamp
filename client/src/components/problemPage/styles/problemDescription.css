@@ -3,6 +3,7 @@
     list-style-type: none;
     overflow: hidden;
     border: solid 3px;
+    margin-bottom: 0px;
 }
 
 .problemDescription{

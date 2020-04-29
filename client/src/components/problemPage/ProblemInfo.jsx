@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import { Markdown } from "react-showdown";
+import MarkdownRender from "../../MarkdownRender.js";
 import SuccessfulSubmissions from "./SuccessfulSubmissions";
 import axios from "axios";
 import Cookie from "js-cookie";
@@ -22,7 +22,7 @@ class ProblemInfo extends Component {
     let userName = Cookie.get("userName");
     axios
       .get(
-        `http://104.211.136.212/contests/${this.props.match.params.contestCode}/problems/${this.props.match.params.problemCode}/${userName}`
+        `/contests/${this.props.match.params.contestCode}/problems/${this.props.match.params.problemCode}/${userName}`
       )
       .then(res => {
         if (res.data.result.data.content.body) {
@@ -38,8 +38,9 @@ class ProblemInfo extends Component {
 
   render() {
     if (this.state.loaded) {
+      let data = this.state.data.result.data.content.body.split("<br />").join("\n");
       let renderProblemStatement = (
-        <Markdown markup={this.state.data.result.data.content.body} />
+        <MarkdownRender source={data} />
       );
       return (
         <ul className="problemPage">

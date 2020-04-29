@@ -18,7 +18,7 @@ class SuccessfulSubmissions extends Component {
     if(newProps.probStatus){
       axios
         .get(
-          `http://104.211.136.212/submissions/${newProps.problemCode}/${userName}`
+          `/submissions/${newProps.problemCode}/${userName}`
         )
         .then(res => {
           if (res.data.result.data.message === "submissions fetched successfully") {

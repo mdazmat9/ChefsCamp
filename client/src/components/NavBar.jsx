@@ -6,7 +6,8 @@ import logo from './logos/logo2.png';
 const ul = {
   overflow: "hidden",
   listStyleType: "none",
-  padding: "10px"
+  padding: "10px",
+  lineHeight: "40px",
 };
 
 const floatLeft = {
@@ -27,7 +28,7 @@ const style = {
   borderRadius: "10px",
   border: "medium none",
   padding: "10px 12px",
-  fontSize: "14px",
+  // fontSize: "14px",
   fontWeight: "bold",
   letterSpacing: "3px",
   transition: "background 350ms cubic-bezier(0, 0, 0.25, 1) 0s",
@@ -82,7 +83,7 @@ class NavBar extends Component {
               </button>
             </li>
           )}
-          <li style={{ float: "right", fontSize: "25px", marginTop: "5px" }}>
+          <li style={{ float: "right", fontSize: "25px"}}>
             Hello{" "}
             <span
               style={{
@@ -96,9 +97,14 @@ class NavBar extends Component {
             </span>{" "}
             {this.props.userName} !
           </li>
-          <li>
-            <Link to="/" style={{ color: this.props.color, fontSize: "30px" }}>
+          <li style={{display: "inline"}}>
+            <Link to="/" style={{ color: this.props.color, fontSize: "20px" }}>
               Home
+            </Link>
+          </li>
+          <li style={{display: "inline", marginLeft: "10px"}}>
+            <Link to="/ide" style={{ color: this.props.color, fontSize: "20px", }}>
+              IDE
             </Link>
           </li>
         </ul>
