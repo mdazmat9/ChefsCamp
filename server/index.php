@@ -27,7 +27,7 @@ $app->get('/', function ($request, $response, $args) {
 
 $app->get('/login', function ($request, $response, $args) {
     return $response
-        ->withHeader('Location', 'https://api.codechef.com/oauth/authorize?response_type=code&client_id=339259dc16c29a7f4dae446ec5a873b0&state=xyz&redirect_uri=http://chefscamp.tech/')
+        ->withHeader('Location', 'https://api.codechef.com/oauth/authorize?response_type=code&client_id=339259dc16c29a7f4dae446ec5a873b0&state=xyz&redirect_uri=http://www.chefscamp.tech/')
         ->withStatus(302);
 });
 
@@ -245,8 +245,8 @@ function get_config(){
     'api_endpoint'=> 'https://api.codechef.com/',
     'authorization_code_endpoint'=> 'https://api.codechef.com/oauth/authorize',
     'access_token_endpoint'=> 'https://api.codechef.com/oauth/token',
-    'redirect_uri'=> 'http://chefscamp.tech/',
-    'website_base_url' => 'http://chefscamp.tech/');
+    'redirect_uri'=> 'http://www.chefscamp.tech/',
+    'website_base_url' => 'http://www.chefscamp.tech/');
 
     return $config;
 }
