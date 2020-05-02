@@ -20,7 +20,7 @@ function MarkdownRender(props) {
       };
       return (
         <MathJax.Provider input="tex">
-            <ReactMarkdown {...newProps} />
+            <ReactMarkdown escapeHtml={false} {...newProps} />
         </MathJax.Provider>
       );
 }

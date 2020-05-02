@@ -38,7 +38,9 @@ class ProblemInfo extends Component {
 
   render() {
     if (this.state.loaded) {
-      let data = this.state.data.result.data.content.body.split("<br />").join("\n");
+      let data = this.state.data.result.data.content.body;
+      data = data.replace(/`/g, "");
+      data = data.replace(/###/g, "");
       let renderProblemStatement = (
         <MarkdownRender source={data} />
       );
