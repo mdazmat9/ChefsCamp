@@ -48,7 +48,7 @@ class ProblemInfo extends Component {
             <strong>
               <Link
                 to={this.state.path}
-                style={{ color: "#1b1b1b", fontSize: "20px" }}
+                style={{ color: "#777", fontSize: "20px" }}
               >
                 {" "}
                 &lt;-Go Back
@@ -83,6 +83,7 @@ class ProblemInfo extends Component {
           </li>
           <li style={{ float: "right", width: "320px" }}>
             <SuccessfulSubmissions
+              theme={this.props.userDetails.themeBool}
               probStatus = {this.state.loaded}
               problemCode={this.props.match.params.problemCode}
             />
@@ -97,7 +98,7 @@ class ProblemInfo extends Component {
               <strong>
                 <Link
                   to={this.state.path}
-                  style={{ color: "#1b1b1b", fontSize: "20px" }}
+                  style={{ color: "#777", fontSize: "20px" }}
                 >
                   {" "}
                   &lt;-Go Back
@@ -114,6 +115,7 @@ class ProblemInfo extends Component {
             </li>
             <li style={{ float: "right", width: "320px" }}>
               <SuccessfulSubmissions
+                theme={this.props.userDetails.themeBool}
                 probStatus = {this.state.loaded}
                 problemCode={this.props.match.params.problemCode}
               />
@@ -127,7 +129,7 @@ class ProblemInfo extends Component {
               <strong>
                 <Link
                   to={this.state.path}
-                  style={{ color: "#1b1b1b", fontSize: "20px" }}
+                  style={{ color: "#777", fontSize: "20px" }}
                 >
                   {" "}
                   &lt;-Go Back
@@ -146,6 +148,7 @@ class ProblemInfo extends Component {
             </li>
             <li style={{ float: "right", width: "320px" }}>
               <SuccessfulSubmissions
+                theme={this.props.userDetails.themeBool}
                 probStatus = {this.state.loaded} 
               />
             </li>

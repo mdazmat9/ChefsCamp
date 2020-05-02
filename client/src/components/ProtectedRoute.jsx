@@ -9,7 +9,7 @@ const ProtectedRoute = ({ component: Component, ...rest }) => {
       render={props => {
         const userName = Cookie.get("userName");
         if (userName || rest.userDetails.isLoggedIn) {
-          return <Component {...props} />;
+          return <Component {...props} userDetails={rest.userDetails} />;
         } else {
           return (
             <Redirect

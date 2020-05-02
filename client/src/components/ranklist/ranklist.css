@@ -14,12 +14,12 @@ caption {
 
 #ranklist {
     border-collapse: collapse;
-    border: 3px solid #ddd;
+    border: 3px solid #b9b9b9;
     width: 100%;
 }
 
 #ranklist td, #ranklist th {
-    border: 1px solid #ddd;
+    border: 1px solid #e1e1e1;
     padding: 8px;
     text-align: left;
 }
@@ -27,9 +27,7 @@ caption {
     cursor: pointer;
 }
 
-#ranklist tr:nth-child(even){background-color: #f2f2f2;}
-
-#ranklist tr:hover {background-color: #ddd;}
+/* #ranklist tr:nth-child(even){background-color: #f8f8f8;} */
 
 #ranklist th {
     padding-top: 12px;

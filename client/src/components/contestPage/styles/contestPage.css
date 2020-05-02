@@ -5,11 +5,11 @@
     list-style-type: none;
 }
 .contestPage{
-    border: solid  5px;
+    border: solid #b9b9b9 3px;
     padding: 2px;
 }
 .contestPage div{
-    border: solid 2px;   
+    border: solid #b9b9b9 1px;   
 }
 .contestPage strong{
     font-size: 25px;

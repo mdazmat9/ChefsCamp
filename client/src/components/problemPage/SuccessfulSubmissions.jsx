@@ -15,22 +15,22 @@ class SuccessfulSubmissions extends Component {
   }
   componentWillReceiveProps(newProps) {
     let userName = Cookie.get("userName");
-    if(newProps.probStatus){
+    if (newProps.probStatus) {
       axios
-        .get(
-          `/submissions/${newProps.problemCode}/${userName}`
-        )
-        .then(res => {
-          if (res.data.result.data.message === "submissions fetched successfully") {
+        .get(`/submissions/${newProps.problemCode}/${userName}`)
+        .then((res) => {
+          if (
+            res.data.result.data.message === "submissions fetched successfully"
+          ) {
             this.setState({ loaded: true, data: res.data });
           } else {
             this.setState({
               loaded: true,
               showMess: true,
-              message: res.data.result.data.message
+              message: res.data.result.data.message,
             });
           }
-      });
+        });
     }
   }
 
@@ -38,7 +38,7 @@ class SuccessfulSubmissions extends Component {
     if (this.state.showMess === false) {
       return this.state.data.result.data.content.map((problem, index) => {
         return (
-          <tr key={index}>
+          <tr key={index} style={(index%2===0 ? this.props.theme == 0  ? {backgroundColor: "#36454f"} : {backgroundColor: '#f8f8f8'} : null)}>
             <td>{problem.username}</td>
             <td>{parseFloat(problem.time).toFixed(2)}</td>
             <td>{Math.round((problem.memory / 1024) * 10) / 10}</td>
@@ -61,7 +61,7 @@ class SuccessfulSubmissions extends Component {
   render() {
     if (this.state.loaded) {
       return (
-        <div style={{ border: "solid 3px" }}>
+        <div style={{ border: "solid #b9b9b9 3px" }}>
           <table id="submissions">
             <caption style={{ textAlign: "left", fontSize: "15px" }}>
               <b>Successful Submissions</b>
@@ -76,7 +76,11 @@ class SuccessfulSubmissions extends Component {
     } else {
       return (
         <div
-          style={{ border: "solid 3px", width: "320px", height: "211px" }}
+          style={{
+            border: "solid #b9b9b9 3px",
+            width: "320px",
+            height: "211px",
+          }}
         >
           <table id="submissions">
             <caption style={{ textAlign: "left", fontSize: "15px" }}>

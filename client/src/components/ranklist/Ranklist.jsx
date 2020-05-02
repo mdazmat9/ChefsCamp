@@ -8,8 +8,9 @@ class Ranklist extends Component {
 		super(props);
 		this.state = {
 			loaded: false,
-			data: null
+			data: null,
 		};
+		
 		this.componentDidMount = this.componentDidMount.bind(this);
 		this.renderTableData = this.renderTableData.bind(this);
 		this.renderTableHeader = this.renderTableHeader.bind(this);
@@ -27,7 +28,7 @@ class Ranklist extends Component {
 	renderTableData() {
 		return this.state.data.result.data.content.map((user, index) => {
 			return (
-				<tr key={index}>
+				<tr key={index} style={(index%2===0 ? this.props.userDetails.themeBool == 0  ? {backgroundColor: "#36454f"} : {backgroundColor: '#f8f8f8'} : null)}>
 					<td>{user.rank}</td>
 					<td>{user.username}</td>
 					<td>{+parseFloat(user.totalScore).toFixed(3)}</td>
@@ -46,7 +47,7 @@ class Ranklist extends Component {
 	render() {
 		if (this.state.loaded) {
 			return (
-				<div style={{ border: "solid 5px" }}>
+				<div style={{ border: "solid #b9b9b9 3px" }}>
 					<table id="ranklist">
 						<caption style={{ textAlign: "left" }}>Ranklist</caption>
 						<tbody>
@@ -60,10 +61,9 @@ class Ranklist extends Component {
 			return (
 				<div
 					style={{
-						border: "solid black 5px",
+						border: "solid #b9b9b9 3px",
 						height: "350px",
 						paddingTop: "350px",
-						width: "963px",
 						fontSize: "30px"
 					}}
 				>

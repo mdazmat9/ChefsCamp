@@ -28,6 +28,7 @@ class ContestPage extends Component {
             <ListProblems
               handleLiftContestDetail={this.handleLiftContestDetail}
               data={this.state.data}
+              theme={this.props.userDetails.themeBool}
               contestCode={this.props.match.params.contestCode}
             />
           </li>

@@ -41,6 +41,7 @@ class App extends Component {
       contests: null,
       // eslint-disable-next-line
       theme: Cookie.get("theme") == 0 ? dark : light,
+      themeBool: Cookie.get("theme") == 0 ? 0 : 1,
     };
     this.handleToggle = this.handleToggle.bind(this);
     this.handleLogin = this.handleLogin.bind(this);
@@ -117,6 +118,7 @@ class App extends Component {
     let toggleTo = this.state.theme === light ? dark : light;
     this.setState({
       theme: toggleTo,
+      themeBool: !this.state.themeBool,
     });
   }
 

@@ -1,20 +1,18 @@
 #submissions {
     font-size: 14px;
     border-collapse: collapse;
-    border: 3px solid #ddd;
+    border: 3px solid #b9b9b9;
     width: 100%;
     text-align: center;
 }
 
 #submissions td, #submissions th {
-    border: 2px solid #ddd;
+    border: 1px solid #e1e1e1;
     font-size: 15px;
     height: 30px;
 }
 
-#submissions tr:nth-child(even){background-color: #f2f2f2;}
-
-#submissions tr:hover {background-color: #ddd;}
+/* #submissions tr:nth-child(even){background-color: #f8f8f8;} */
 
 #submissions th {
     font-size: 15px;
