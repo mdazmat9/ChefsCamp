@@ -1,6 +1,8 @@
 # < ChefsCamp✅ />
 Made with ❤ to help you grow. Chef'sCamp is a platform that consumes CodeChef API to proviede service such as searching for CodeChef contests and practicing CodeChef problems at Chef'sCamp.
 
+http://chefscamp.tech  -- Checkout the application
+
 ## Getting Started
 1. Install Node 10.18.1+ (e.g. using [node version manger][nvm]), php 7+ from https://www.php.net/ , latest Composer from https://getcomposer.org/download/ , MySQL 5.7+ from https://www.mysql.com/
 
