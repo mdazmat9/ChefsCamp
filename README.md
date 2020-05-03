@@ -1,4 +1,4 @@
-# < ChefsCamp✅ />
+# < ChefsCamp![](https://github.com/ankiiitraj/ChefsCamp/blob/master/client/public/favicon-32x32.png) />
 Made with ❤ to help you grow. Chef'sCamp is a platform that consumes CodeChef API to proviede service such as searching for CodeChef contests and practicing CodeChef problems at Chef'sCamp.
 
 http://chefscamp.tech  -- Checkout the application
