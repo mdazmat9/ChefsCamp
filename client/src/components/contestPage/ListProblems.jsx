@@ -39,6 +39,7 @@ class ListProblems extends Component {
     return this.props.data.result.data.content.problemsList.map(
       (problem, index) => {
         return (
+          // eslint-disable-next-line
           <tr key={index} style={(index%2===0 ? this.props.theme == 0  ? {backgroundColor: "#36454f"} : {backgroundColor: '#f8f8f8'} : null)}>
             <td onClick={this.handleClick}>{problem.problemCode}</td>
             <td>{problem.successfulSubmissions}</td>

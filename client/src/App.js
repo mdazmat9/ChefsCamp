@@ -11,6 +11,7 @@ import ContestPage from "./components/contestPage/ContestPage.jsx";
 import axios from "axios";
 import Cookie from "js-cookie";
 import NotFound from "./components/NotFound.jsx";
+import Footer from "./components/Footer";
 
 const light = {
   minHeight: "100vh",
@@ -41,6 +42,7 @@ class App extends Component {
       contests: null,
       // eslint-disable-next-line
       theme: Cookie.get("theme") == 0 ? dark : light,
+      // eslint-disable-next-line
       themeBool: Cookie.get("theme") == 0 ? 0 : 1,
     };
     this.handleToggle = this.handleToggle.bind(this);
@@ -191,6 +193,7 @@ class App extends Component {
                 />
                 <Route path="/" component={NotFound} />
               </Switch>
+              <Footer userDetails={this.state} />
             </Router>
           </div>
         </center>

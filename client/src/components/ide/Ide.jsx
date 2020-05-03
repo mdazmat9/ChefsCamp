@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import Cookie from "js-cookie";
 import "./ide.css";
-import axios from 'axios';
+import axios from "axios";
 var CodeMirror = require("react-codemirror");
 require("codemirror/lib/codemirror.css");
 
@@ -14,9 +14,9 @@ class Ide extends Component {
       code: "/*Start Writing Your Code*/",
       output: "",
       input: "",
-      lang: Cookie.get('lang'),
+      lang: Cookie.get("lang"),
       disabled: false,
-      link: '',
+      link: "",
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleClickSubmit = this.handleClickSubmit.bind(this);
@@ -32,7 +32,7 @@ class Ide extends Component {
   }
 
   handleClickRun() {
-    this.setState({disabled: !this.state.disabled});
+    this.setState({ disabled: !this.state.disabled });
     let code = this.state.code;
     let input = this.state.input;
     let lang = this.state.lang;
@@ -42,50 +42,65 @@ class Ide extends Component {
       input: input,
     };
     let userName = Cookie.get("userName");
-    axios.post(`/ide/run/${userName}`, payload)
-    .then(res => {
-        this.setState({link: res.data.result.data.link});
+    axios
+      .post(`/ide/run/${userName}`, payload)
+      .then((res) => {
+        this.setState({ link: res.data.result.data.link });
         this.intervalID = setInterval(this.getStatus, 4000);
       })
-      .catch(err =>{
+      .catch((err) => {
         console.log(err.data);
-        this.setState({disabled: !this.state.disabled, output: 'Something went wrong, try again!'});
-      })
+        this.setState({
+          disabled: !this.state.disabled,
+          output: "Something went wrong, try again!",
+        });
+      });
     // console.log(payload.language, payload.sourceCode, payload.input);
   }
-  getStatus(){
+  getStatus() {
     this.numRequests += 1;
     let userName = Cookie.get("userName");
-    axios.get(`/ide/status/${this.state.link}/${userName}`)
-      .then(res =>{
-        if(this.numRequests > 3){
-          this.setState({output: "Timed Out, try again!", disabled: !this.state.disabled});
-          this.numRequests = 0;
-          clearInterval(this.intervalID);
-        }else if(res.data.result.data.output.length > 0){
-          this.setState({output: res.data.result.data.output, disabled: !this.state.disabled});
-          this.numRequests = 0;
-          clearInterval(this.intervalID);
-        }else if(res.data.result.data.cmpinfo.length > 0){
-          this.setState({output: res.data.result.data.cmpinfo, disabled: !this.state.disabled});
-          this.numRequests = 0;
-          clearInterval(this.intervalID);
-        }else if(res.data.result.data.stderr.length > 0){
-          this.setState({output: res.data.result.data.stderr, disabled: !this.state.disabled});
-          this.numRequests = 0;
-          clearInterval(this.intervalID);
-        }
-      })
+    axios.get(`/ide/status/${this.state.link}/${userName}`).then((res) => {
+      if (this.numRequests > 3) {
+        this.setState({
+          output: "Timed Out, try again!",
+          disabled: !this.state.disabled,
+        });
+        this.numRequests = 0;
+        clearInterval(this.intervalID);
+      } else if (res.data.result.data.output.length > 0) {
+        this.setState({
+          output: res.data.result.data.output,
+          disabled: !this.state.disabled,
+        });
+        this.numRequests = 0;
+        clearInterval(this.intervalID);
+      } else if (res.data.result.data.cmpinfo.length > 0) {
+        this.setState({
+          output: res.data.result.data.cmpinfo,
+          disabled: !this.state.disabled,
+        });
+        this.numRequests = 0;
+        clearInterval(this.intervalID);
+      } else if (res.data.result.data.stderr.length > 0) {
+        this.setState({
+          output: res.data.result.data.stderr,
+          disabled: !this.state.disabled,
+        });
+        this.numRequests = 0;
+        clearInterval(this.intervalID);
+      }
+    });
   }
 
-  componentWillUnmount(){
+  componentWillUnmount() {
     clearInterval(this.intervalID);
   }
 
   handleChange(event) {
     this.setState({ input: event.target.value });
   }
-  handleSelect(event){
+  handleSelect(event) {
     Cookie.set("lang", event.target.value, { expires: 30 });
     this.setState({ lang: event.target.value });
   }
@@ -123,11 +138,17 @@ class Ide extends Component {
             />
           </li>
         </ul>
-        <div>
-          <select value={this.state.lang} onChange={this.handleSelect}>{langs}</select>
+        <div style={{ display: "flex" }}>
+          <div>
+            <select value={this.state.lang} onChange={this.handleSelect}>
+              {langs}
+            </select>
+          </div>
+          <button disabled={this.state.disabled} onClick={this.handleClickRun}>
+            {this.state.disabled ? "Running . . ." : "Run"}
+          </button>
+          <button onClick={this.handleClickSubmit}>Submit</button>
         </div>
-        <button disabled={this.state.disabled} onClick={this.handleClickRun}>{this.state.disabled ? "Running . . ." : "Run"}</button>
-        <button onClick={this.handleClickSubmit}>Submit</button>
       </div>
     );
   }

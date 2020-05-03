@@ -28,6 +28,7 @@ class Ranklist extends Component {
 	renderTableData() {
 		return this.state.data.result.data.content.map((user, index) => {
 			return (
+      			// eslint-disable-next-line
 				<tr key={index} style={(index%2===0 ? this.props.userDetails.themeBool == 0  ? {backgroundColor: "#36454f"} : {backgroundColor: '#f8f8f8'} : null)}>
 					<td>{user.rank}</td>
 					<td>{user.username}</td>

@@ -156,7 +156,7 @@ class Search extends Component {
         <div
           style={{
             border: "solid #b9b9b9 3px",
-            height: "600px",
+            height: "480px",
             paddingTop: "150px"
           }}
         >
