@@ -42,7 +42,7 @@ http://chefscamp.tech  -- Checkout the application
 
 * **Ankit Raj** 
 
-See also the list of [contributors](https://github.com/your/project/contributors) who participated in this project.
+See also the list of [contributors](https://github.com/ankiiitraj/chefscamp/contributors) who participated in this project.
 
 ## License
 
