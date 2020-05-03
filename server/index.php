@@ -27,7 +27,7 @@ $app->get('/', function ($request, $response, $args) {
 
 $app->get('/login', function ($request, $response, $args) {
     return $response
-        ->withHeader('Location', 'https://api.codechef.com/oauth/authorize?response_type=code&client_id=339259dc16c29a7f4dae446ec5a873b0&state=xyz&redirect_uri=http://www.chefscamp.tech/')
+        ->withHeader('Location', 'https://api.codechef.com/oauth/authorize?response_type=code&client_id=339259dc16c29a7f4dae446ec5a873b0&state=xyz&redirect_uri=http://chefscamp.tech/')
         ->withStatus(302);
 });
 
@@ -45,6 +45,7 @@ $app->get('/contests/{userName}', function ($request, $response, $args) {
     $payload = json_encode(make_contests_list_api_request($args['userName']));
     $response->getBody()->write($payload);
     return $response
+      ->withHeader('Cache-Control', 'public, max-age=86400')
       ->withHeader('Content-Type', 'application/json');;
 });
 
@@ -52,6 +53,7 @@ $app->get('/contests/{contestCode}/{userName}', function ($request, $response, $
     $payload = json_encode(make_contest_details_api_request($args['userName'], $args['contestCode']));
     $response->getBody()->write($payload);
     return $response
+			->withHeader('Cache-Control', 'public, max-age=604800')
       ->withHeader('Content-Type', 'application/json');
 });
 
@@ -59,6 +61,7 @@ $app->get('/rankings/{contestCode}/{userName}', function ($request, $response, $
     $payload = json_encode(make_contest_ranklist_api_request($args['userName'], $args['contestCode']));
     $response->getBody()->write($payload);
     return $response
+		  ->withHeader('Cache-Control', 'public, max-age=60')
       ->withHeader('Content-Type', 'application/json');
 });
 
@@ -66,6 +69,7 @@ $app->get('/contests/{contestCode}/problems/{problemCode}/{userName}', function 
     $payload = json_encode(make_contest_problem_api_request($args['userName'], $args['problemCode'], $args['contestCode']));
     $response->getBody()->write($payload);
     return $response
+			->withHeader('Cache-Control', 'public, max-age=604800')
       ->withHeader('Content-Type', 'application/json');;
 });
 
@@ -73,6 +77,7 @@ $app->get('/submissions/{problemId}/{userName}', function ($request, $response, 
     $payload = json_encode(make_submissions_api_request($args['userName'], $args['problemId']));
     $response->getBody()->write($payload);
     return $response
+		  ->withHeader('Cache-Control', 'public, max-age=604800')
       ->withHeader('Content-Type', 'application/json');;
 });
 
@@ -245,8 +250,8 @@ function get_config(){
     'api_endpoint'=> 'https://api.codechef.com/',
     'authorization_code_endpoint'=> 'https://api.codechef.com/oauth/authorize',
     'access_token_endpoint'=> 'https://api.codechef.com/oauth/token',
-    'redirect_uri'=> 'http://www.chefscamp.tech/',
-    'website_base_url' => 'http://www.chefscamp.tech/');
+    'redirect_uri'=> 'http://chefscamp.tech/',
+    'website_base_url' => 'http://chefscamp.tech/');
 
     return $config;
 }
