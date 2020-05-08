@@ -97,9 +97,15 @@ $app->post('/ide/run/{userName}', function ($request, $response, $args) {
 });
 
 $app->any('{route:.*}', function ($request, $response, $args) {
-    return $response
-        ->withHeader('Location', '/')
-        ->withStatus(302);
+    $file = __DIR__.'/index.html';
+    if (file_exists($file)) {
+        $response->getBody()->write(file_get_contents($file));
+        $response = $response->withHeader('Content-Type', 'text/html');
+        return $response;
+    }else{
+        $response->getBody()->write("Some thing break down try reloading");
+        return $response;
+    }
 });
 
 /* ******************************************************ROUTES ENDED************************************************************ */
