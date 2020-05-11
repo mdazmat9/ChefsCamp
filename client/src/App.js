@@ -136,7 +136,7 @@ class App extends Component {
         }}
       >
         <center>
-          <div style={{ width: "963px", maxWidth: "963px" }}>
+          <div style={{ width: "963px", maxWidth: "963px", position: "relative" }}>
             <Router>
               <NavBar
                 handleToggle={this.handleToggle}
