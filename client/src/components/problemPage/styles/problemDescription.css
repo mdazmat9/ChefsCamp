@@ -9,7 +9,8 @@
 .problemDescription{
     padding: 1rem;
     border: solid #b9b9b9 3px;
-    font-size: 14px;
+    font-size: 15px;
+    line-height: 1.5;
 }
 .problemDescription h1, h2{
     margin: 0;

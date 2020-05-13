@@ -40,7 +40,7 @@ class SuccessfulSubmissions extends Component {
         return (
           // eslint-disable-next-line
           <tr key={index} style={(index%2===0 ? this.props.theme == 0  ? {backgroundColor: "#36454f"} : {backgroundColor: '#f8f8f8'} : null)}>
-            <td>{problem.username}</td>
+            <td><a style={(this.props.theme == 0  ? {color: "#fff"} : {backgroundColor: '#000'})} href={"https://codechef.com/users/" + problem.username} target="_blank" rel="noopener noreferrer">{problem.username}</a></td>
             <td>{parseFloat(problem.time).toFixed(2)}</td>
             <td>{Math.round((problem.memory / 1024) * 10) / 10}</td>
             <td>{problem.language}</td>
