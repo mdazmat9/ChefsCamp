@@ -5,6 +5,8 @@ use Slim\Factory\AppFactory;
 
 require __DIR__ . '/vendor/autoload.php';
 
+include './redis.php';
+
 $app = AppFactory::create();
 
 $app->addBodyParsingMiddleware();
@@ -145,13 +147,25 @@ function make_contest_ranklist_api_request($user_name, $contest_code){
     return $response;
 }
 
-function make_contests_list_api_request($user_name){
-    $config = get_config();
-    $path = $config['api_endpoint']."contests";
-    $response = json_decode(make_api_request($user_name, $path));
-    return $response;
-}
+// function make_contests_list_api_request($user_name){
+//     $config = get_config();
+//     $path = $config['api_endpoint']."contests";
+//     $response = json_decode(make_api_request($user_name, $path));
+//     return $response;
+// }
 
+function make_contests_list_api_request($user_name){
+    $data = get_content_from_cache('contest');
+    if($data != 0){
+        return $data;
+    }else{
+        $config = get_config();
+        $path = $config['api_endpoint']."contests";
+        $response = json_decode(make_api_request($user_name, $path));
+        set_content_to_cache('contest', json_encode($response), 24*60*60);
+        return $response;
+    }
+}
 function make_contest_details_api_request($user_name, $contest_code){
     $config = get_config();
     $path = $config['api_endpoint']."contests/".$contest_code;
